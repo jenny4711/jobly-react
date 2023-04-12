@@ -1,0 +1,31 @@
+nav{
+  display:flex;
+
+}
+.Pagination-ul{
+  display:flex;
+  align-items: center;
+margin:1rem;
+  list-style: none;
+
+
+
+}
+.page-link{
+  margin:1rem;
+
+}
+.page-item a{
+  color:white;
+}
+.page-item a:hover{
+
+background-color: white;
+padding:2px;
+ 
+}
+
+.page-item a:active{
+  background-color: white;
+  padding:2px;
+}

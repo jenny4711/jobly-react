@@ -38,11 +38,7 @@ class JoblyApi {
 
   /** Get details on a company by handle. */
 
- static async allCompanies(data){
-  let res= await this.request(`companies/`,data = {},'get');
-  console.log(res)
-  return res.companies
- } 
+
 
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
@@ -62,3 +58,5 @@ JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
     export default JoblyApi
+
+    

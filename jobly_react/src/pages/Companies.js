@@ -18,13 +18,13 @@ function CompanyList() {
 
   const [companies, setCompanies] = useState(null);
   useEffect(()=>{
-    async function getList(data){
-   let result=await JoblyApi.getCompanies() 
-   console.log(result)
+    async function getList(name){
+   let result=await JoblyApi.getCompanies(name) 
+ setCompanies(result)
     }
     getList()
   },[])
-
+console.log(companies)
  
   return (
       <div >

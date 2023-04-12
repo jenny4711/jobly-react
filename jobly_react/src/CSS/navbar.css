@@ -1,0 +1,30 @@
+.Nav{
+  display:flex;
+flex-direction: row;
+  background-color: black;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 2px 0 #003049, 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  height:3rem;
+  width:100vw;
+ 
+}
+
+.Nav a{
+  color:white;
+  margin:2rem;
+  text-decoration: none;
+
+}
+span:hover{
+  font-weight: bolder;
+ color:white;
+
+}
+
+
+
+
+
+
+

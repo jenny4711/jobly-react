@@ -1,0 +1,26 @@
+.Home{
+  /* background-color: pink; */
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width:30rem;
+  height:30rem;
+  margin-bottom: 15rem;
+}
+.Home-btn{
+  margin-right: 1rem;
+}
+.Home-btn a{
+  text-decoration: none;
+  color:black;
+  padding-left: 1rem;
+ 
+  
+}
+
+span:hover{
+  font-weight: bolder;
+  color:black;
+
+}

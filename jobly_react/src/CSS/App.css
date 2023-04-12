@@ -1,0 +1,63 @@
+.App {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:center;
+
+}
+
+/* Login */
+
+
+.Login,.Signup{
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width:30rem;
+  height:30rem;
+  margin-left:35rem;
+  margin-bottom: 15rem;
+  background-color: black;
+  box-shadow: 0 2px 2px 0 #003049, 0 3px 1px -2px #003049, 0 1px 5px 0 #003049;
+}
+
+.Login-form,.Signup-form{
+  display:flex;
+  flex-direction: column;
+
+  color:#ffc300;
+  font-weight: bold;
+  border: 3px solid #ffc300;
+  padding:4em;
+  
+}
+.Login-form button,.Signup-form button{
+  margin-top:3rem;
+  border:none;
+  background-color: black;
+  color:#ffc300;
+  font-size:20px;
+
+
+}
+.Login-form button,.Signup-form button:hover{
+  font-weight: bolder;
+}
+
+/* signUp */
+
+.Signup{
+ 
+  width:30rem;
+  height:40rem;
+  margin-left:40rem;
+  margin-top:10rem;
+ 
+  padding:4rem;
+  
+}
+
+
+
+

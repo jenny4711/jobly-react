@@ -1,0 +1,31 @@
+.CompanyDetail{
+  width:100vw;
+  height:100vh;
+}
+.CompanyDetail-list{
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width:70rem; 
+  height:50rem;
+  /* padding:1rem; */
+  margin-left:25rem;
+  margin-bottom: 4rem;
+  margin-top:3rem;
+  background-color: black;
+  color:white;
+  box-shadow: 0 2px 2px 0 #003049, 0 3px 1px -2px #003049, 0 1px 5px 0 #003049;
+}
+
+.CompanyDetail-box{
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  border: 2px solid #ffc300; 
+  width:65rem;
+  height:40rem;
+  padding:2rem;
+}

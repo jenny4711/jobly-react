@@ -12,6 +12,7 @@ const CompanyList = () => {
   const [perPage, setPerpage] = useState(5);
   const [searchOn, setSearchOn] = useState(false);
 
+
   const searchByName = async(e) => {
     if (e.key === "Enter") {
       const keyword = e.target.value;
@@ -30,8 +31,10 @@ const CompanyList = () => {
       console.log(error);
     }
   }
- 
 
+ 
+ 
+console.log(companies)
   useEffect(() => {
     
     getList();

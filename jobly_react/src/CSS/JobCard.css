@@ -1,0 +1,20 @@
+.JobCard{
+  display:flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffc300;
+  margin:1rem;
+  width:50rem;
+  height:8rem;
+  padding: 3rem;
+
+
+
+}
+.JobCard-ul{
+  display:flex;
+  flex-direction: column;
+}
+
+

@@ -10,46 +10,52 @@ const CompanyList = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerpage] = useState(5);
-  const [search, setSearch] = useState("");
+  const [searchOn, setSearchOn] = useState(false);
 
-  const searchByName = (e) => {
+  const searchByName = async(e) => {
     if (e.key === "Enter") {
       const keyword = e.target.value;
-      setSearch(keyword);
+      await getList(keyword)
+      setSearchOn(true);
     }
   };
+
+  async function getList(search) {
+    try {
+      setLoading(true);
+      let result = await JoblyApi.getCompanies(search);
+      setCompanies(result);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
  
 
   useEffect(() => {
-    async function getList(search) {
-      try {
-        setLoading(true);
-        let result = await JoblyApi.getCompanies(search);
-        setCompanies(result);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    
     getList();
-  }, [search]);
+  }, []);
 
 
   // get current posts
   const indexOfLastPost = currentPage * perPage;
   const indexOfFirstPost = indexOfLastPost - perPage;
   const currentPosts = companies?.slice(indexOfFirstPost, indexOfLastPost);
-
+  
+// get pageNumber
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="Companies">
+     
+      <div className='Companies-top'>
       <h1>Companies</h1>
-      <div>
         <input
           onKeyDown={(e) => searchByName(e)}
           className="Companies-input"
           type="text"
+          placeholder='Search'
         />
       </div>
 
@@ -63,7 +69,7 @@ const CompanyList = () => {
         </span>
       ))}
 
-      <Pagination perPage={perPage} totalPosts={50} paginate={paginate} />
+      <Pagination perPage={perPage} totalPosts={50} paginate={paginate} searchOn={searchOn} />
     </div>
   );
 };

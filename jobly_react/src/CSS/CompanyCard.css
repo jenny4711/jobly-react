@@ -3,11 +3,14 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: white;
+  background-color: #ffc300;;
   margin:1rem;
-  width:50rem;
-  height:10rem;
-  padding: 3rem;
+  
+  width:43rem;
+  height:6rem;
+  padding:1rem;
+  padding-bottom: 2rem;
+  padding-top:3rem;
 
 
 }

@@ -16,16 +16,21 @@ margin:1rem;
 
 }
 .page-item a{
-  color:white;
+  color:#ffc300;
 }
 .page-item a:hover{
 
-background-color: white;
+background-color: #ffc300;
+color:white;
 padding:2px;
  
 }
 
 .page-item a:active{
-  background-color: white;
+  background-color: #ffc300;
+  color:white;
   padding:2px;
+}
+.hide{
+  display:none;
 }

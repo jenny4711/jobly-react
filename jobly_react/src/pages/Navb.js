@@ -25,6 +25,10 @@ const Navb = () => {
            <Link to='/companies'>
             <span> Companies</span>
            </Link>
+
+           <Link to='/jobs'>
+            <span> Jobs</span>
+           </Link>
         </div>
 
       </nav>

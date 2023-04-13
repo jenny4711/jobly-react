@@ -9,8 +9,8 @@ const CompanyCard = ({handle,description,loading}) => {
     <div className='CompanyCard'>
 
    
- <h3>{handle}</h3>
- <h4>{description}</h4>
+ <h4>{handle}</h4>
+ <h6>{description}</h6>
 
     </div>
   )

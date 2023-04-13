@@ -1,0 +1,35 @@
+.Jobs-back{
+  width:100vw;
+
+}
+
+.Jobs{
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width:70rem;
+  height:70rem;
+  /* padding:1rem; */
+  margin-left:25rem;
+  margin-bottom: 4rem;
+  margin-top:3rem;
+  background-color: black;
+  box-shadow: 0 2px 2px 0 #003049, 0 3px 1px -2px #003049, 0 1px 5px 0 #003049;
+
+
+}
+
+.Jobs-top{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+h2{
+  color:#ffc300;
+}
+
+.Jobs-input{
+  width:20rem;
+  background-color: #ffc300;
+}

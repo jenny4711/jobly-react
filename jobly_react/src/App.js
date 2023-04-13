@@ -19,8 +19,8 @@ function App() {
       backgroundImage:"url(./img/bkg.avif)",
       backgroundRepeat:"no-repeat",
       backgroundSize:"cover",
-      // width:"100vw",
-      // height:"100vh",
+      width:"100vw",
+      height:"100vh",
 
     }}>
       <Navb/>

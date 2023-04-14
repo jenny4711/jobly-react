@@ -1,6 +1,6 @@
 .CompanyDetail{
   width:100vw;
-  height:100vh;
+
 }
 .CompanyDetail-list{
   display:flex;
@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   width:70rem; 
-  height:50rem;
+
   /* padding:1rem; */
   margin-left:25rem;
   margin-bottom: 4rem;
@@ -24,8 +24,8 @@
   justify-content: flex-start;
   align-items: flex-start;
 
-  border: 2px solid #ffc300; 
-  width:65rem;
-  height:40rem;
+
+  /* width:65rem;
+  height:40rem; */
   padding:2rem;
 }

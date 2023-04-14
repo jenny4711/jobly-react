@@ -3,7 +3,6 @@ import "../CSS/Companies.css";
 import JoblyApi from "../api";
 import CompanyCard from "./CompanyCard";
 import Pagination from "./Pagination";
-// import ErrorBoundary from '../ErrorBoundary';
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState(null);
@@ -12,11 +11,10 @@ const CompanyList = () => {
   const [perPage, setPerpage] = useState(5);
   const [searchOn, setSearchOn] = useState(false);
 
-
-  const searchByName = async(e) => {
+  const searchByName = async (e) => {
     if (e.key === "Enter") {
       const keyword = e.target.value;
-      await getList(keyword)
+      await getList(keyword);
       setSearchOn(true);
     }
   };
@@ -32,47 +30,47 @@ const CompanyList = () => {
     }
   }
 
- 
- 
-console.log(companies)
+  console.log(companies);
   useEffect(() => {
-    
     getList();
   }, []);
-
 
   // get current posts
   const indexOfLastPost = currentPage * perPage;
   const indexOfFirstPost = indexOfLastPost - perPage;
   const currentPosts = companies?.slice(indexOfFirstPost, indexOfLastPost);
-  
-// get pageNumber
+
+  // get pageNumber
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="Companies">
-     
-      <div className='Companies-top'>
-      <h1>Companies</h1>
+      <div className="Companies-top">
+        <h1>Companies</h1>
         <input
           onKeyDown={(e) => searchByName(e)}
           className="Companies-input"
           type="text"
-          placeholder='Search'
+          placeholder="Search"
         />
       </div>
 
       {currentPosts?.map((item) => (
-        <span>
+        <div>
           <CompanyCard
             handle={item.handle}
             description={item.description}
             loading={loading}
           />
-        </span>
+        </div>
       ))}
 
-      <Pagination perPage={perPage} totalPosts={50} paginate={paginate} searchOn={searchOn} />
+      <Pagination
+        perPage={perPage}
+        totalPosts={50}
+        paginate={paginate}
+        searchOn={searchOn}
+      />
     </div>
   );
 };

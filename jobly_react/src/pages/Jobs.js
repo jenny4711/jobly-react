@@ -11,17 +11,14 @@ const Jobs = () => {
   const [perPage, setPerpage] = useState(6);
   const [searchOn, setSearchOn] = useState(false);
 
-
-
-  const searchByTitle=async(e)=>{
-    if(e.key === "Enter"){
-      const keyword=e.target.value;
-      await getJobList(keyword)
-      setSearchOn(true)
-      console.log(keyword)
-
+  const searchByTitle = async (e) => {
+    if (e.key === "Enter") {
+      const keyword = e.target.value;
+      await getJobList(keyword);
+      setSearchOn(true);
+      console.log(keyword);
     }
-  }
+  };
   const getJobList = async (title) => {
     try {
       setLoading(true);
@@ -48,19 +45,24 @@ const Jobs = () => {
   return (
     <div
       className="Jobs-back"
-      style={{
-        backgroundImage: "url(./img/bkg.avif)",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
+      // style={{
+      //   backgroundImage: "url(./img/bkg.avif)",
+      //   backgroundRepeat: "no-repeat",
+      //   backgroundSize: "cover",
+      // }}
     >
       <div className="Jobs">
-        <div className='Jobs-top'>
-        <h2>Jobs</h2>
-        <input className='Jobs-input' type='text' placeholder='Search' onKeyDown={(e)=>searchByTitle(e)}/>
+        <div className="Jobs-top">
+          <h2>Jobs</h2>
+          <input
+            className="Jobs-input"
+            type="text"
+            placeholder="Search"
+            onKeyDown={(e) => searchByTitle(e)}
+          />
         </div>
-      
-        <span>
+
+        <div>
           {currentPosts?.map((item) => (
             <JobCard
               id={item.id}
@@ -71,7 +73,7 @@ const Jobs = () => {
               companyName={item.companyName}
             />
           ))}
-        </span>
+        </div>
 
         <Pagination
           perPage={perPage}
@@ -79,7 +81,6 @@ const Jobs = () => {
           paginate={paginate}
           searchOn={searchOn}
         />
-
       </div>
     </div>
   );

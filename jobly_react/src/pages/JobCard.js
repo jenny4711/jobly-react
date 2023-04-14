@@ -13,6 +13,9 @@ const JobCard = ({id,title,salary,equity,companyName}) => {
        
 
       </div>
+      <div className='JobCard-btn'>
+        <button>APPLY</button>
+      </div>
     </div>
   )
 }

@@ -3,6 +3,7 @@
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
+  flex-wrap: wrap;
   background-color: #ffc300;
   margin:1rem;
   width:50rem;
@@ -17,4 +18,16 @@
   flex-direction: column;
 }
 
+.JobCard-btn button{
+  border:none;
+  background-color: #ffc300;
+  font-weight: bold;
+}
 
+
+.JobCard-btn button :hover{
+   background-color: black;
+   color:#ffc300;
+  font-weight: bolder;
+
+}

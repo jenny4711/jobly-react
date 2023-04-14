@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import useLocalStorage from './useLocalStorage'
 import { Routes, Route } from "react-router-dom";
 import Navb from "./pages/Navb";
 import Home from "./pages/Home";
@@ -16,11 +16,11 @@ import Alert from "react-bootstrap/Alert";
 
 function App() {
   const [log, setLog] = useState(false);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useLocalStorage("token","");
   const [data, setData] = useState(null);
   const [errMsg, setErrMsg] = useState("");
   console.log(data);
-
+console.log(data)
   const signUp = async () => {
     try {
       const result = await JoblyApi.signUp(data);
@@ -51,7 +51,7 @@ function App() {
   useEffect(() => {
     logIn(data);
   }, [data]);
-
+  console.log(token)
   return (
     <div
       className="App"
@@ -59,6 +59,7 @@ function App() {
         backgroundImage: "url(./img/bkg.avif)",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
+        
       }}
     >
       <Navb log={log} setLog={setLog} />
@@ -77,9 +78,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home log={log} setErrMsg={setErrMsg} />} />
-        <Route path="/companies/" element={<Companies />} />
+        <Route path="/companies/" element={<Companies setErrMsg={setErrMsg} />} />
         <Route path="/companies/:handle" element={<CompanyDetail />} />
-        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/jobs" element={<Jobs setErrMsg={setErrMsg}/>} />
         <Route
           path="/login"
           element={

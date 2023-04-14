@@ -51,8 +51,8 @@ const CompanyDetail = () => {
             </bold>{" "}
             {handleSearch?.description}
           </h4>
-          <div>
-            <h3>JOBS</h3>
+          <div className='companyDetail-job'>
+            <h3 className='companyDetail-h3'>JOBS</h3>
             {jobs && jobs.length > 0 ? (
               jobs.map((item) => (
                 <JobDetail

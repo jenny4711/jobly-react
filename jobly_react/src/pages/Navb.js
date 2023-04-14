@@ -1,15 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 import "../CSS/navbar.css";
 
 const Navb = ({ log, setLog }) => {
+  const navigate=useNavigate()
   const logOutKey = (e) => {
     if (e.target.className === "logout") {
       setLog(false);
+      navigate('/login')
+ 
     }
-    console.log(e.target.className, "target");
-    console.log(e.key, "key");
+   
   };
   return (
     <nav className="Nav">

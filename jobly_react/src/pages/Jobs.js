@@ -3,6 +3,7 @@ import "../CSS/Jobs.css";
 import JoblyApi from "../api";
 import Pagination from "./Pagination";
 import JobCard from "./JobCard";
+import uuid from 'react-uuid';
 
 const Jobs = () => {
   const [jobs, setJobs] = useState();
@@ -44,6 +45,7 @@ const Jobs = () => {
   console.log(jobs);
   return (
     <div
+    key={uuid()}
       className="Jobs-back"
       // style={{
       //   backgroundImage: "url(./img/bkg.avif)",
@@ -51,8 +53,8 @@ const Jobs = () => {
       //   backgroundSize: "cover",
       // }}
     >
-      <div className="Jobs">
-        <div className="Jobs-top">
+      <div className="Jobs" key={uuid()}>
+        <div className="Jobs-top" key={uuid()}>
           <h2>Jobs</h2>
           <input
             className="Jobs-input"
@@ -62,7 +64,7 @@ const Jobs = () => {
           />
         </div>
 
-        <div>
+        <div key={uuid()}>
           {currentPosts?.map((item) => (
             <JobCard
               id={item.id}

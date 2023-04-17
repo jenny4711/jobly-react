@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import uuid from 'react-uuid';
 
 const Signup = ({  setLog ,signUp}) => {
   const ITEM = {
@@ -38,7 +39,7 @@ const Signup = ({  setLog ,signUp}) => {
   }
 
   return (
-    <div className="Signup">
+    <div className="Signup" key={uuid()}>
       <form className="Signup-form" onSubmit={handleSubmit}>
         <label>USERNAME</label>
         <input

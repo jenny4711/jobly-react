@@ -1,22 +1,32 @@
 import React,{useState,useEffect} from 'react'
 import '../CSS/Profile.css'
 import JoblyApi from "../api";
+import { useJwt } from "react-jwt";
+import uuid from 'react-uuid';
 
-const Profile = ({userInfo,data}) => {
-  console.log(userInfo)
-  console.log(data)
-  const [dt,setDt]=useState("")
-console.log(dt)
+
+
+const Profile = ({userInfo,token}) => {
   
   const ITEM = {
-    username: dt.username,
-    password: dt.password,
-    firstName: dt.firstName,
-    lastName: dt.lastName,
-    email: dt.email,
+    username: null,
+    password: null,
+    firstName:null,
+    lastName: null,
+    email: null,
   };
 const [item,setItem]=useState(ITEM);
 const [formData,setFormData]=useState(ITEM);
+const { decodedToken, isExpired } = useJwt(token);
+console.log(decodedToken)
+const getInfo=async(username)=>{
+  
+    
+  let res=JoblyApi.getInfoUser(username)
+}
+
+
+
 const handleChange = async (e) => {
   const { name, value } = e.target;
   setItem({ ...item, [e.target.name]: e.target.value });
@@ -31,32 +41,7 @@ const {username}=userInfo
 console.log(username)
 
 
-const getUserInfo = async (username) => {
-  console.log(username);
-
-   try {
-    let result=await JoblyApi.getInfoUser(username);
-     console.log(result);
-    setDt(result)
-     console.log(result, "result");
-     console.log(data)
-   } catch (e) {
-     console.error(e);
-   }
- };
-
-
-useEffect(()=>{
-  getUserInfo(username)
-  
-  },[username])
-  console.log(dt)
-
-
-
-
-
-
+console.log(decodedToken)
 
 
 const handleSubmit=async(e)=>{
@@ -82,7 +67,7 @@ const handleSubmit=async(e)=>{
 
 
   return (
-    <div className="Profile">
+    <div className="Profile" key={uuid()}>
       <h3>PROFILE</h3>
       <form onSubmit={handleSubmit} className="Profile-form">
         <label>USERNAME</label>

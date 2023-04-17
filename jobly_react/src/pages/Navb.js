@@ -1,5 +1,6 @@
 import React from "react";
 import { Link,useNavigate } from "react-router-dom";
+import uuid from 'react-uuid';
 
 import "../CSS/navbar.css";
 
@@ -14,8 +15,8 @@ const Navb = ({ log, logOut,data }) => {
    
   };
   return (
-    <nav className="Nav">
-      <div className="Navb-right">
+    <nav className="Nav" key={uuid()}>
+      <div className="Navb-right" key={uuid()}>
         <Link to="/">
           <span>Home</span>
         </Link>
@@ -25,7 +26,7 @@ const Navb = ({ log, logOut,data }) => {
      
       </div>
 
-      <div className="Navb-left">
+      <div className="Navb-left" key={uuid()}>
       
         <Link to="/login">
           <span className={log ? "logout" : "login"} onClick={logOutKey}>

@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../CSS/Home.css";
+import uuid from 'react-uuid';
 const Home = ({ log, setErrMsg,data }) => {
   setErrMsg("");
   return (
-    <div className="Home">
-      <div className={"Home-back"}>
-        <div className="Home-border">
+    <div className="Home" key={uuid()}>
+      <div className="Home-back" key={uuid()}>
+        <div className="Home-border" key={uuid()}>
           <h2>JOBLY</h2>
           <h2>All the jobs in one, convenient place.</h2>
 
-          <div className={!log ? "Home-btn" : "hide"}>
+          <div key={uuid()} className={!log ? "Home-btn" : "hide"}>
             <Link to="/login">
               <span className="Home-login">LOGIN</span>
             </Link>
@@ -19,7 +20,7 @@ const Home = ({ log, setErrMsg,data }) => {
             </Link>
           </div>
 
-          <div className={log ? "Home-after" : "hide"}>
+          <div key={uuid()} className={log ? "Home-after" : "hide"}>
             <h3>Welcome Back!{data}</h3>
           </div>
         </div>

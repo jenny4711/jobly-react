@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import uuid from 'react-uuid';
 import useLocalStorage from "./useLocalStorage";
 import { Routes, Route } from "react-router-dom";
 import Navb from "./pages/Navb";
@@ -62,14 +63,15 @@ function App() {
 
   
 
-  useEffect(() => {
-    signUp(data);
+  // useEffect(() => {
+  //   signUp(data);
 
-    logIn(data);
-  }, []);
+  //   logIn(data);
+  // }, []);
 
   return (
     <div
+    key={uuid()}
       className="App"
       style={{
         backgroundImage: "url(./img/bkg.avif)",
@@ -138,6 +140,7 @@ function App() {
               log={log}
               data={data}
               userInfo={userInfo ? userInfo : ""}
+              token={token}
            
             />
           }

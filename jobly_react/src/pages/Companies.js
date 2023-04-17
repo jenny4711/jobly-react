@@ -3,6 +3,7 @@ import "../CSS/Companies.css";
 import JoblyApi from "../api";
 import CompanyCard from "./CompanyCard";
 import Pagination from "./Pagination";
+import uuid from 'react-uuid';
 
 const Companies= () => {
   const [companies, setCompanies] = useState(null);
@@ -45,8 +46,8 @@ const Companies= () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="Companies">
-      <div className="Companies-top">
+    <div className="Companies" key={uuid()}>
+      <div className="Companies-top" key={uuid()}>
         <h1>Companies</h1>
         <input
           onKeyDown={(e) => searchByName(e)}
@@ -57,7 +58,7 @@ const Companies= () => {
       </div>
 
       {currentPosts?.map((item) => (
-        <div>
+        <div key={uuid()}>
           <CompanyCard
             handle={item.handle}
             description={item.description}

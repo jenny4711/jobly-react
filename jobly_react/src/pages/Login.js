@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../CSS/App.css";
 import { useNavigate } from "react-router-dom";
+import uuid from 'react-uuid';
 const Login = ({ setData, setLog, token, data,logIn }) => {
   const ITEM = {
     username: null,
@@ -36,6 +37,7 @@ const Login = ({ setData, setLog, token, data,logIn }) => {
 
   return (
     <div
+    key={uuid()}
       className="Login-back"
       style={{
         backgroundImage: "url(./img/bkg.png)",
@@ -45,10 +47,11 @@ const Login = ({ setData, setLog, token, data,logIn }) => {
         height: "100vh",
       }}
     >
-      <div className="Login">
+      <div className="Login" key={uuid()}>
         <form className="Login-form" onSubmit={handleSubmit}>
           <label>USERNAME</label>
           <input
+          key={uuid()}
             type="text"
             name="username"
             value={formData.username}

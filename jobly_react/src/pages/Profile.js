@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import '../CSS/Profile.css'
 import JoblyApi from "../api";
 
-const Profile = ({userInfo,data,getUserInfo}) => {
+const Profile = ({userInfo,data}) => {
   console.log(userInfo)
   console.log(data)
   const [dt,setDt]=useState(null)
@@ -29,16 +29,25 @@ const handleChange = async (e) => {
 // let username = userInfo?userInfo.username:""
 const {username}=userInfo
 console.log(username)
-const getInfo=async()=>{
- 
-  let info =await getUserInfo(username)
-  console.log(info)
-  setDt(info)
-}
-console.log(dt)
+
+
+const getUserInfo = async (username) => {
+  console.log(username);
+
+   try {
+    let result=await JoblyApi.getInfoUser(username);
+     console.log(result);
+    //  setData(result);
+     console.log(result, "result");
+     console.log(data)
+   } catch (e) {
+     console.error(e);
+   }
+ };
+
 
 useEffect(()=>{
-  getInfo(username)
+  getUserInfo(username)
   
   },[username])
   console.log(dt)

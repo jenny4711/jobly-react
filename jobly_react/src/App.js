@@ -23,6 +23,7 @@ function App() {
   const [errMsg, setErrMsg] = useState("");
   const [userInfo, setUserInfo] = useState(null);
 
+
   const logOut = () => {
     setToken("");
     setLog(false);
@@ -49,7 +50,7 @@ function App() {
       setToken(result);
       setErrMsg("");
       setUserInfo(userData);
-      console.log(userData);
+    
       return { success: true };
     } catch (e) {
       console.error(e);
@@ -57,27 +58,13 @@ function App() {
       return { success: false };
     }
   };
-  console.log(userInfo);
 
-  const getUserInfo = async (username) => {
+
   
-   
-    console.log(username);
-
-    try {
-     await JoblyApi.getInfoUser(username);
-      // console.log(result);
-      // setData(result);
-      // console.log(result, "result");
-      // console.log(data)
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   useEffect(() => {
     signUp(data);
-    getUserInfo();
+
     logIn(data);
   }, []);
 
@@ -151,7 +138,7 @@ function App() {
               log={log}
               data={data}
               userInfo={userInfo ? userInfo : ""}
-              getUserInfo={getUserInfo}
+           
             />
           }
         />

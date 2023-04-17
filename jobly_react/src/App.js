@@ -65,11 +65,11 @@ function App() {
     console.log(username);
 
     try {
-      const result = await JoblyApi.getInfoUser(username);
-      console.log(result);
-      setData(result);
-      console.log(result, "result");
-      console.log(data)
+     await JoblyApi.getInfoUser(username);
+      // console.log(result);
+      // setData(result);
+      // console.log(result, "result");
+      // console.log(data)
     } catch (e) {
       console.error(e);
     }

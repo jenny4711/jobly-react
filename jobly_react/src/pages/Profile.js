@@ -2,14 +2,18 @@ import React,{useState,useEffect} from 'react'
 import '../CSS/Profile.css'
 import JoblyApi from "../api";
 
-const Profile = ({userInfo,data}) => {
+const Profile = ({userInfo,data,getUserInfo}) => {
   console.log(userInfo)
+  console.log(data)
+  const [dt,setDt]=useState(null)
+
+  
   const ITEM = {
-    username: data.username,
-    password: data.password,
-    firstName: data.firstName,
-    lastName: data.lastName,
-    email: data.email,
+    username: null,
+    password: null,
+    firstName: null,
+    lastName: null,
+    email: null,
   };
 const [item,setItem]=useState(ITEM);
 const [formData,setFormData]=useState(ITEM);
@@ -22,6 +26,29 @@ const handleChange = async (e) => {
   }));
 
 };
+// let username = userInfo?userInfo.username:""
+const {username}=userInfo
+console.log(username)
+const getInfo=async()=>{
+ 
+  let info =await getUserInfo(username)
+  console.log(info)
+  setDt(info)
+}
+console.log(dt)
+
+useEffect(()=>{
+  getInfo(username)
+  
+  },[username])
+  console.log(dt)
+
+
+
+
+
+
+
 
 const handleSubmit=async(e)=>{
   e.preventDefault();
@@ -40,7 +67,6 @@ const handleSubmit=async(e)=>{
 
  
 }
-
 
 
 

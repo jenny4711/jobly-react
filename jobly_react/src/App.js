@@ -59,9 +59,9 @@ function App() {
   };
   console.log(userInfo);
 
-  const getUserInfo = async () => {
-    let username= userInfo.username;
-    console.log(data);
+  const getUserInfo = async (username) => {
+  
+   
     console.log(username);
 
     try {
@@ -69,6 +69,7 @@ function App() {
       console.log(result);
       setData(result);
       console.log(result, "result");
+      console.log(data)
     } catch (e) {
       console.error(e);
     }
@@ -150,6 +151,7 @@ function App() {
               log={log}
               data={data}
               userInfo={userInfo ? userInfo : ""}
+              getUserInfo={getUserInfo}
             />
           }
         />

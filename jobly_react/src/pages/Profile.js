@@ -5,15 +5,15 @@ import JoblyApi from "../api";
 const Profile = ({userInfo,data}) => {
   console.log(userInfo)
   console.log(data)
-  const [dt,setDt]=useState(null)
-
+  const [dt,setDt]=useState("")
+console.log(dt)
   
   const ITEM = {
-    username: null,
-    password: null,
-    firstName: null,
-    lastName: null,
-    email: null,
+    username: dt.username,
+    password: dt.password,
+    firstName: dt.firstName,
+    lastName: dt.lastName,
+    email: dt.email,
   };
 const [item,setItem]=useState(ITEM);
 const [formData,setFormData]=useState(ITEM);
@@ -37,7 +37,7 @@ const getUserInfo = async (username) => {
    try {
     let result=await JoblyApi.getInfoUser(username);
      console.log(result);
-    //  setData(result);
+    setDt(result)
      console.log(result, "result");
      console.log(data)
    } catch (e) {

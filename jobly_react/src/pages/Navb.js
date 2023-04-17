@@ -3,11 +3,11 @@ import { Link,useNavigate } from "react-router-dom";
 
 import "../CSS/navbar.css";
 
-const Navb = ({ log, setLog }) => {
+const Navb = ({ log, logOut,data }) => {
   const navigate=useNavigate()
   const logOutKey = (e) => {
     if (e.target.className === "logout") {
-      setLog(false);
+      logOut();
       navigate('/login')
  
     }
@@ -19,9 +19,14 @@ const Navb = ({ log, setLog }) => {
         <Link to="/">
           <span>Home</span>
         </Link>
+        <Link to="/profile">
+        <span>{log?data:""}</span>
+        </Link>
+     
       </div>
 
       <div className="Navb-left">
+      
         <Link to="/login">
           <span className={log ? "logout" : "login"} onClick={logOutKey}>
             {log ? "LOG-OUT" : "LOG-IN"}

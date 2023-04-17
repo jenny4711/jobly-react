@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../CSS/App.css";
 import { useNavigate } from "react-router-dom";
-const Login = ({ setData, setLog, token, data }) => {
+const Login = ({ setData, setLog, token, data,logIn }) => {
   const ITEM = {
     username: null,
     password: null,
@@ -20,11 +20,11 @@ const Login = ({ setData, setLog, token, data }) => {
     }));
     console.log(data);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     setFormData(ITEM);
-    setData(formData);
-    if (token) {
+    let res=await logIn(formData);
+    if (res.success === true) {
       setLog(true);
       navigate("/");
     } else {

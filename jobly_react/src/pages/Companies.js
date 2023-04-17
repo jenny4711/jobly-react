@@ -4,7 +4,7 @@ import JoblyApi from "../api";
 import CompanyCard from "./CompanyCard";
 import Pagination from "./Pagination";
 
-const CompanyList = ({setErrMsg}) => {
+const Companies= () => {
   const [companies, setCompanies] = useState(null);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,7 +32,7 @@ const CompanyList = ({setErrMsg}) => {
 
   console.log(companies);
   useEffect(() => {
-    setErrMsg("")
+   
     getList();
   }, []);
 
@@ -76,4 +76,4 @@ const CompanyList = ({setErrMsg}) => {
   );
 };
 
-export default CompanyList;
+export default Companies;

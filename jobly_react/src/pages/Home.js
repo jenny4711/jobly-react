@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../CSS/Home.css";
-const Home = ({ log, setErrMsg }) => {
+const Home = ({ log, setErrMsg,data }) => {
   setErrMsg("");
   return (
     <div className="Home">
@@ -20,7 +20,7 @@ const Home = ({ log, setErrMsg }) => {
           </div>
 
           <div className={log ? "Home-after" : "hide"}>
-            <h3>Welcome Back!</h3>
+            <h3>Welcome Back!{data}</h3>
           </div>
         </div>
       </div>

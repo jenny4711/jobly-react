@@ -64,6 +64,11 @@ class JoblyApi {
     return res.token;
   }
 
+  static async getInfoUser(username){
+    let res=await this.request(`users/${username}`);
+    return res.user
+  }
+
   static async profile(username,data){
     let res=await this.request(`users/${username}`,data,"patch")
     return res.user;
@@ -80,3 +85,6 @@ JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxM
     // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
     // "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
     // "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+
+
+    // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjM0IiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY4MTQ5Njg3OX0.4_fa_6RVYrcjoHVQygCYQSvddjyKbRxpkDe3MM_cKqY"

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Signup = ({ setData, data, token, setLog }) => {
+const Signup = ({  setLog ,signUp}) => {
   const ITEM = {
     username: null,
     password: null,
     firstName: null,
     lastName: null,
     email: null,
+  
   };
 
   const [formData, setFormData] = useState(ITEM);
@@ -20,21 +21,21 @@ const Signup = ({ setData, data, token, setLog }) => {
       ...formData,
       [name]: value,
     }));
-    console.log(data);
+   
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormData(ITEM);
-    setData(formData);
-    if (token) {
+ let res = await signUp(formData)
+    // setData(formData);
+    console.log(res.success)
+    if (res.success === true) {
       setLog(true);
       navigate("/");
     } else {
       setLog(false);
     }
-
-    console.log(token);
-  };
+  }
 
   return (
     <div className="Signup">
@@ -75,6 +76,8 @@ const Signup = ({ setData, data, token, setLog }) => {
           value={formData.email}
           onChange={handleChange}
         />
+  
+
         <button className="Signup-btn">SUBMIT</button>
       </form>
     </div>

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import useLocalStorage from './useLocalStorage'
+import useLocalStorage from "./useLocalStorage";
 import { Routes, Route } from "react-router-dom";
 import Navb from "./pages/Navb";
 import Home from "./pages/Home";
-import Companies from "./pages/Companies";
-import CompanyDetail from "./pages/CompanyDetail";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Jobs from "./pages/Jobs";
-import Profile from "./pages/Profile";
+import {
+  PrivateRoutes,
+  PrivateRoutesCD,
+  PrivateRoutesJB,
+  PrivateRoutesPF,
+} from "./PrivateRoutes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./CSS/App.css";
 import JoblyApi from "./api";
@@ -16,42 +18,68 @@ import Alert from "react-bootstrap/Alert";
 
 function App() {
   const [log, setLog] = useState(false);
-  const [token, setToken] = useLocalStorage("token","");
+  const [token, setToken] = useLocalStorage("");
   const [data, setData] = useState(null);
   const [errMsg, setErrMsg] = useState("");
-  console.log(data);
-console.log(data)
-  const signUp = async () => {
+  const [userInfo, setUserInfo] = useState(null);
+
+  const logOut = () => {
+    setToken("");
+    setLog(false);
+    localStorage.removeItem("token", token);
+  };
+
+  const signUp = async (newData) => {
     try {
-      const result = await JoblyApi.signUp(data);
+      const result = await JoblyApi.signUp(newData);
+
       setToken(result);
-      setErrMsg("");
+      return { success: true };
     } catch (e) {
       console.error(e);
       setErrMsg(e);
+      return { success: false };
     }
   };
 
-  const logIn = async () => {
+  const logIn = async (userData) => {
     try {
-      const result = await JoblyApi.login(data);
+      const result = await JoblyApi.login(userData);
+
       setToken(result);
       setErrMsg("");
+      setUserInfo(userData);
+      console.log(userData);
+      return { success: true };
     } catch (e) {
       console.error(e);
       setErrMsg(e);
+      return { success: false };
+    }
+  };
+  console.log(userInfo);
+
+  const getUserInfo = async () => {
+    let username= userInfo.username;
+    console.log(data);
+    console.log(username);
+
+    try {
+      const result = await JoblyApi.getInfoUser(username);
+      console.log(result);
+      setData(result);
+      console.log(result, "result");
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  console.log(token);
   useEffect(() => {
     signUp(data);
-  }, [data]);
-
-  useEffect(() => {
+    getUserInfo();
     logIn(data);
-  }, [data]);
-  console.log(token)
+  }, []);
+
   return (
     <div
       className="App"
@@ -59,10 +87,13 @@ console.log(data)
         backgroundImage: "url(./img/bkg.avif)",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        
       }}
     >
-      <Navb log={log} setLog={setLog} />
+      <Navb
+        log={log}
+        logOut={logOut}
+        data={userInfo ? userInfo.username : ""}
+      />
 
       {errMsg && errMsg.length > 0
         ? errMsg.map((e) => (
@@ -77,15 +108,31 @@ console.log(data)
         : ""}
 
       <Routes>
-        <Route path="/" element={<Home log={log} setErrMsg={setErrMsg} />} />
-        <Route path="/companies/" element={<Companies setErrMsg={setErrMsg} />} />
-        <Route path="/companies/:handle" element={<CompanyDetail />} />
-        <Route path="/jobs" element={<Jobs setErrMsg={setErrMsg}/>} />
+        <Route
+          path="/"
+          element={
+            <Home
+              log={log}
+              setErrMsg={setErrMsg}
+              data={userInfo ? userInfo.username : ""}
+            />
+          }
+        />
+        <Route
+          path="/companies/"
+          element={<PrivateRoutes log={log} setErrMsg={setErrMsg} />}
+        />
+        <Route
+          path="/companies/:handle"
+          element={<PrivateRoutesCD log={log} />}
+        />
+        <Route path="/jobs" element={<PrivateRoutesJB log={log} />} />
         <Route
           path="/login"
           element={
             <Login
               setData={setData}
+              logIn={logIn}
               setLog={setLog}
               token={token}
               data={data}
@@ -94,9 +141,18 @@ console.log(data)
         />
         <Route
           path="/signup"
-          element={<Signup setData={setData} setLog={setLog} token={token} />}
+          element={<Signup setLog={setLog} signUp={signUp} />}
         />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoutesPF
+              log={log}
+              data={data}
+              userInfo={userInfo ? userInfo : ""}
+            />
+          }
+        />
       </Routes>
     </div>
   );

@@ -11,16 +11,27 @@ flex-direction: row;
 }
 
 .Nav a{
-  color:white;
+  color:#ffc300;
   margin:2rem;
   text-decoration: none;
 
 }
 span:hover{
   font-weight: bolder;
- color:white;
+ color:#ffc300;
+ 
 
 }
+
+/* .Navb-right{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color:#ffc300;
+
+  height:3rem;
+} */
+
 
 
 

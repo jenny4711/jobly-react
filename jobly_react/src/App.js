@@ -19,7 +19,7 @@ import Alert from "react-bootstrap/Alert";
 
 function App() {
   const [log, setLog] = useState(false);
-  const [token, setToken] = useLocalStorage("");
+  const [token, setToken] = useLocalStorage('token');
   const [data, setData] = useState(null);
   const [errMsg, setErrMsg] = useState("");
   const [userInfo, setUserInfo] = useState(null);
@@ -47,7 +47,7 @@ function App() {
   const logIn = async (userData) => {
     try {
       const result = await JoblyApi.login(userData);
-
+    console.log(result)
       setToken(result);
       setErrMsg("");
       setUserInfo(userData);
@@ -61,13 +61,6 @@ function App() {
   };
 
 
-  
-
-  // useEffect(() => {
-  //   signUp(data);
-
-  //   logIn(data);
-  // }, []);
 
   return (
     <div
@@ -126,6 +119,7 @@ function App() {
               setLog={setLog}
               token={token}
               data={data}
+              setToken={setToken}
             />
           }
         />

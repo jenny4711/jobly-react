@@ -7,53 +7,65 @@ import uuid from 'react-uuid';
 
 
 const Profile = ({userInfo,token}) => {
-  
+
+  const [dt,setDt]=useState("")
   const ITEM = {
-    username: null,
-    password: null,
-    firstName:null,
-    lastName: null,
-    email: null,
+    username: dt.username,
+    password: dt.password,
+    firstName:dt.firstName,
+    lastName: dt.lastName,
+    email: dt.email,
   };
+
+
 const [item,setItem]=useState(ITEM);
-const [formData,setFormData]=useState(ITEM);
-const { decodedToken, isExpired } = useJwt(token);
-console.log(decodedToken)
-const getInfo=async(username)=>{
+const [formData,setFormData]=useState({
+  username: dt.username,
+  password: "",
+  firstName:dt.firstName,
+  lastName: dt.lastName,
+  email: dt.email,
+});
+
+const { decodedToken, isExpired } = useJwt(localStorage.token);
+
+console.log(dt)
+const getInfo=async()=>{
+  const username= decodedToken.username
+
+console.log(username)
   
-    
-  let res=JoblyApi.getInfoUser(username)
+  let res=await JoblyApi.getInfoUser(username)
+  console.log(res)
+  setDt(res)
 }
 
 
+useEffect(()=>{
+getInfo()
+},[])
 
 const handleChange = async (e) => {
   const { name, value } = e.target;
-  setItem({ ...item, [e.target.name]: e.target.value });
-  setFormData((formData) => ({
-    ...formData,
-    [name]: value,
-  }));
-
+  setDt(d=>({
+    ...d,
+    [name]:value,
+  }))
 };
-// let username = userInfo?userInfo.username:""
-const {username}=userInfo
-console.log(username)
 
+console.log(dt)
 
-console.log(decodedToken)
 
 
 const handleSubmit=async(e)=>{
   e.preventDefault();
 
-  let username = userInfo?userInfo.username:""
-  console.log(username,'username')
-  setFormData(ITEM);
+ 
   try{
-    let result= await JoblyApi.profile(username,formData)
+    const username=userInfo.username
+    let result= await JoblyApi.profile(username,dt)
 
-    console.log(result)
+    console.log(result,'update')
 
   }catch(e){
     console.error(e)
@@ -67,19 +79,20 @@ const handleSubmit=async(e)=>{
 
 
   return (
-    <div className="Profile" key={uuid()}>
+    <div className="Profile" key={dt.username}>
       <h3>PROFILE</h3>
-      <form onSubmit={handleSubmit} className="Profile-form">
+      <form className="Profile-form" onSubmit={handleSubmit}>
         <label>USERNAME</label>
-        <input name="username" type='text' value={formData.username} onChange={handleChange}/>
+        <input name="username" type='text' value={dt.username} onChange={handleChange}/>
         <label>PASSWORD</label>
-        <input name="password" type='text' value={formData.password} onChange={handleChange}/>
+        <input name="password" type='text' value={dt.password} onChange={handleChange} />
+      
         <label>FIRST NAME</label>
-        <input name="firstName" type='text' value={formData.firstName} onChange={handleChange}/>
+        <input name="firstName" type='text' value={dt.firstName} onChange={handleChange}/>
         <label>LAST NAME</label>
-        <input name="lastName" type='text' value={formData.lastName} onChange={handleChange}/>
+        <input name="lastName" type='text' value={dt.lastName} onChange={handleChange}/>
         <label>E-MAIL</label>
-        <input name="email" type="email" value={formData.email} onChange={handleChange}/>
+        <input name="email" type="email" value={dt.email}onChange={handleChange} />
 
       <button className='Profile-btn'>EDIT</button>
       </form>

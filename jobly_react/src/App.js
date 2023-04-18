@@ -27,20 +27,14 @@ function App() {
   const [errMsg, setErrMsg] = useState("");
   const [userInfo, setUserInfo] = useState(null);
 
-  const logOut = () => {
-    setToken(null);
-    setLog(false);
-    localStorage.removeItem("token", token);
-    setDt(null)
-   
-  };
-
   const signUp = async (newData) => {
     try {
       const result = await JoblyApi.signUp(newData);
+      JoblyApi.token = result;
 
       setToken(result);
-   
+      setUserInfo(newData);
+      setLog(true);
       return { success: true };
     } catch (e) {
       console.error(e);
@@ -57,6 +51,7 @@ function App() {
       setToken(result);
       setErrMsg("");
       setUserInfo(userData);
+      setLog(true);
 
       return { success: true };
     } catch (e) {
@@ -65,24 +60,37 @@ function App() {
       return { success: false };
     }
   };
+
+  const logOut = () => {
+    setToken(null);
+    setLog(false);
+    setUserInfo(null);
+    localStorage.removeItem("token", token);
+  };
+  console.log(token);
+
   const getInfo = async () => {
     const decode = jwt_decode(token);
     let { username } = decode;
     console.log(username);
-
     JoblyApi.token = token;
-
-    let res = await JoblyApi.getInfoUser(username);
-    console.log(res);
-    setDt(res);
+    try {
+      let res = await JoblyApi.getInfoUser(username);
+      setDt(res);
+      console.log(res);
+      return dt;
+    } catch (e) {
+      console.error(e);
+    }
   };
   useEffect(() => {
-    getInfo();
- 
-  }, []);
+    if (token) {
+      getInfo();
+    }
+  }, [token]);
 
   console.log(dt);
-
+  console.log(userInfo);
   return (
     <div
       key={uuid()}
@@ -155,7 +163,7 @@ function App() {
               log={log}
               setDt={setDt}
               userInfo={userInfo ? userInfo : ""}
-              dt={dt}
+              dt={dt ? dt : ""}
             />
           }
         />

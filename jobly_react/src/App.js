@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import uuid from 'react-uuid';
+import uuid from "react-uuid";
 import useLocalStorage from "./useLocalStorage";
 import { Routes, Route } from "react-router-dom";
+import { useJwt } from "react-jwt";
 import Navb from "./pages/Navb";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -16,15 +17,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./CSS/App.css";
 import JoblyApi from "./api";
 import Alert from "react-bootstrap/Alert";
+import jwt_decode from "jwt-decode";
 
 function App() {
+  const [dt, setDt] = useState("");
   const [log, setLog] = useState(false);
-  const [token, setToken] = useLocalStorage('token',"");
+  const [token, setToken] = useLocalStorage("token", "");
   const [data, setData] = useState(null);
   const [errMsg, setErrMsg] = useState("");
   const [userInfo, setUserInfo] = useState(null);
 
-console.log(token)
   const logOut = () => {
     setToken("");
     setLog(false);
@@ -47,11 +49,12 @@ console.log(token)
   const logIn = async (userData) => {
     try {
       const result = await JoblyApi.login(userData);
-    console.log(result)
+
+      JoblyApi.token = result;
       setToken(result);
       setErrMsg("");
       setUserInfo(userData);
-    
+
       return { success: true };
     } catch (e) {
       console.error(e);
@@ -59,12 +62,26 @@ console.log(token)
       return { success: false };
     }
   };
+  const getInfo = async () => {
+    const decode = jwt_decode(token);
+    let { username } = decode;
+    console.log(username);
 
+    JoblyApi.token = token;
 
+    let res = await JoblyApi.getInfoUser(username);
+    console.log(res);
+    setDt(res);
+  };
+  useEffect(() => {
+    getInfo();
+  }, []);
+
+  console.log(dt);
 
   return (
     <div
-    key={uuid()}
+      key={uuid()}
       className="App"
       style={{
         backgroundImage: "url(./img/bkg.avif)",
@@ -97,7 +114,7 @@ console.log(token)
             <Home
               log={log}
               setErrMsg={setErrMsg}
-              data={userInfo ? userInfo.username : ""}
+              userInfo={userInfo ? userInfo.username : ""}
             />
           }
         />
@@ -132,10 +149,9 @@ console.log(token)
           element={
             <PrivateRoutesPF
               log={log}
-              data={data}
+              setDt={setDt}
               userInfo={userInfo ? userInfo : ""}
-              token={token}
-           
+              dt={dt}
             />
           }
         />

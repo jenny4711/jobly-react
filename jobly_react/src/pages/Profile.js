@@ -1,101 +1,68 @@
 import React,{useState,useEffect} from 'react'
 import '../CSS/Profile.css'
 import JoblyApi from "../api";
-import { useJwt } from "react-jwt";
-import uuid from 'react-uuid';
 
 
 
-const Profile = ({userInfo,token}) => {
-
-  const [dt,setDt]=useState("")
-  const ITEM = {
-    username: dt.username,
-    password: dt.password,
-    firstName:dt.firstName,
-    lastName: dt.lastName,
-    email: dt.email,
-  };
-console.log(token)
-
-const [item,setItem]=useState(ITEM);
-const [formData,setFormData]=useState({
-  username: dt.username,
-  password: "",
-  firstName:dt.firstName,
-  lastName: dt.lastName,
-  email: dt.email,
-});
-
-const { decodedToken, isExpired } = useJwt(localStorage.token);
-
-console.log(localStorage.token)
 
 
-const getInfo=async()=>{
-  // const username= decodedToken.username
-let { username }=decodedToken
-
-  
-  let res=await JoblyApi.getInfoUser(username)
-  console.log(res)
-  setDt(res)
-}
-
-
-useEffect(()=>{
-getInfo()
-
-},[])
-
-const handleChange = async (e) => {
-  const { name, value } = e.target;
-  setDt(d=>({
-    ...d,
-    [name]:value,
-  }))
-};
-
+const Profile = ({log,userInfo,token,dt,setDt}) => {
 console.log(dt)
 
 
 
-const handleSubmit=async(e)=>{
-  e.preventDefault();
 
- 
-  try{
-    const username= decodedToken.username
-    let result= await JoblyApi.profile(username,dt)
 
-    console.log(result,'update')
 
-  }catch(e){
-    console.error(e)
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    let {username}=userInfo
+    console.log(username)
+    try{
+      let res= await JoblyApi.profile(username,dt)
+      console.log(res,'saved')
+
+    }catch (e){
+      console.error(e)
+    }
+
+
   }
 
- 
-}
-
+  const handleChange=(e)=>{
+    e.preventDefault();
+    const {name,value}=e.target;
+    setDt(d=>({
+      ...d,
+      [name]:value,
+    }))
+console.log(e.target)
+    
+  }
 
 console.log(dt)
+
+
+
+
+
 
 
   return (
-    <div className="Profile" key={dt.username}>
+    <div className="Profile" >
       <h3>PROFILE</h3>
-      <form className="Profile-form" onSubmit={handleSubmit}>
+      <form className="Profile-form" onSubmit={handleSubmit} >
         <label>USERNAME</label>
         <input name="username" type='text' value={dt.username} onChange={handleChange}/>
         <label>PASSWORD</label>
-        <input name="password" type='text' value={dt.password} onChange={handleChange} />
+        <input name="password" type='text' value={dt.password} onChange={handleChange}/>
       
         <label>FIRST NAME</label>
-        <input name="firstName" type='text' value={dt.firstName} onChange={handleChange}/>
+        <input name="firstName" type='text' value={dt.firstName} onChange={handleChange} />
         <label>LAST NAME</label>
         <input name="lastName" type='text' value={dt.lastName} onChange={handleChange}/>
         <label>E-MAIL</label>
-        <input name="email" type="email" value={dt.email}onChange={handleChange} />
+        <input name="email" type="email" value={dt.email} onChange={handleChange}/>
 
       <button className='Profile-btn'>EDIT</button>
       </form>

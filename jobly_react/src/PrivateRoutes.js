@@ -20,8 +20,8 @@ const PrivateRoutesCD=({log})=>{
   const PrivateRoutesJB=({log})=>{
     return log === true?<Jobs/>:<Navigate to="/"/>
   }
-  const PrivateRoutesPF=({log,data,userInfo})=>{
-    return log === true?<Profile data={data} userInfo={userInfo}/>:<Navigate to="/"/>
+  const PrivateRoutesPF=({log,userInfo,dt,setDt})=>{
+    return log === true?<Profile userInfo={userInfo} dt={dt} setDt={setDt}/>:<Navigate to="/"/>
   }
 
 

@@ -20,6 +20,7 @@ class JoblyApi {
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
     const url = `${BASE_URL}/${endpoint}`;
+    console.log(this.token)
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
         ? data
@@ -71,6 +72,7 @@ class JoblyApi {
 
   static async profile(username,data){
     let res=await this.request(`users/${username}`,data,"patch")
+    console.log(res)
     return res.user;
   }
 

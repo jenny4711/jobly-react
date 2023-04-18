@@ -19,12 +19,12 @@ import Alert from "react-bootstrap/Alert";
 
 function App() {
   const [log, setLog] = useState(false);
-  const [token, setToken] = useLocalStorage('token');
+  const [token, setToken] = useLocalStorage('token',"");
   const [data, setData] = useState(null);
   const [errMsg, setErrMsg] = useState("");
   const [userInfo, setUserInfo] = useState(null);
 
-
+console.log(token)
   const logOut = () => {
     setToken("");
     setLog(false);

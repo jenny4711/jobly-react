@@ -16,7 +16,7 @@ const Profile = ({userInfo,token}) => {
     lastName: dt.lastName,
     email: dt.email,
   };
-
+console.log(token)
 
 const [item,setItem]=useState(ITEM);
 const [formData,setFormData]=useState({
@@ -29,11 +29,13 @@ const [formData,setFormData]=useState({
 
 const { decodedToken, isExpired } = useJwt(localStorage.token);
 
-console.log(dt)
-const getInfo=async()=>{
-  const username= decodedToken.username
+console.log(localStorage.token)
 
-console.log(username)
+
+const getInfo=async()=>{
+  // const username= decodedToken.username
+let { username }=decodedToken
+
   
   let res=await JoblyApi.getInfoUser(username)
   console.log(res)
@@ -43,6 +45,7 @@ console.log(username)
 
 useEffect(()=>{
 getInfo()
+
 },[])
 
 const handleChange = async (e) => {
@@ -62,7 +65,7 @@ const handleSubmit=async(e)=>{
 
  
   try{
-    const username=userInfo.username
+    const username= decodedToken.username
     let result= await JoblyApi.profile(username,dt)
 
     console.log(result,'update')
@@ -75,7 +78,7 @@ const handleSubmit=async(e)=>{
 }
 
 
-
+console.log(dt)
 
 
   return (

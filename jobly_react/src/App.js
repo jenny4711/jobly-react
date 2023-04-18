@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import uuid from "react-uuid";
 import useLocalStorage from "./useLocalStorage";
 import { Routes, Route } from "react-router-dom";
-import { useJwt } from "react-jwt";
+
 import Navb from "./pages/Navb";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -28,9 +28,11 @@ function App() {
   const [userInfo, setUserInfo] = useState(null);
 
   const logOut = () => {
-    setToken("");
+    setToken(null);
     setLog(false);
     localStorage.removeItem("token", token);
+    setDt(null)
+   
   };
 
   const signUp = async (newData) => {
@@ -38,6 +40,7 @@ function App() {
       const result = await JoblyApi.signUp(newData);
 
       setToken(result);
+   
       return { success: true };
     } catch (e) {
       console.error(e);
@@ -75,6 +78,7 @@ function App() {
   };
   useEffect(() => {
     getInfo();
+ 
   }, []);
 
   console.log(dt);

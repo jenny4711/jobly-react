@@ -164,6 +164,7 @@ function App() {
               setDt={setDt}
               userInfo={userInfo ? userInfo : ""}
               dt={dt ? dt : ""}
+              setErrMsg={setErrMsg}
             />
           }
         />

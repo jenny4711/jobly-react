@@ -9,6 +9,7 @@ const Signup = ({  setLog ,signUp}) => {
     firstName: "",
     lastName: "",
     email: "",
+    
   
   };
    
@@ -104,6 +105,8 @@ const Signup = ({  setLog ,signUp}) => {
         
          
         />
+
+
   
 
         <button className="Signup-btn">SUBMIT</button>

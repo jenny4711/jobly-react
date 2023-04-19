@@ -1,74 +1,92 @@
-import React,{useState,useEffect} from 'react'
-import '../CSS/Profile.css'
+import React from "react";
+import "../CSS/Profile.css";
+import { Navigate } from 'react-router-dom';
 import JoblyApi from "../api";
 
+const Profile = ({  userInfo, dt, setDt}) => {
+  console.log(dt);
 
-
-
-
-const Profile = ({log,userInfo,token,dt,setDt}) => {
-console.log(dt)
-
-
-
-
-
-
-  const handleSubmit=async(e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let {username}=userInfo
-    console.log(username)
-    try{
-      let res= await JoblyApi.profile(username,dt)
-      console.log(res,'saved')
-
-    }catch (e){
-      console.error(e)
+    let { username } = userInfo;
+    let defaultDT = {
+      firstName: dt.firstName,
+      lastName: dt.lastName,
+      email:dt.email,
+      password: dt.password,
+    };
+    console.log(defaultDT, "dt");
+    try {
+      let res = await JoblyApi.profile(username, defaultDT);
+      <Navigate to="/"/>
+      console.log("IT has been saved!!!")
+      return {success:true}
+  
+   
+    } catch (e) {
+      console.error(e);
     }
+    setDt((d) => ({ ...d, password: "" }));
+    console.log(dt);
+  };
 
-
-  }
-
-  const handleChange=(e)=>{
+  const handleChange = (e) => {
     e.preventDefault();
-    const {name,value}=e.target;
-    setDt(d=>({
+    const { name, value } = e.target;
+    setDt((d) => ({
       ...d,
-      [name]:value,
-    }))
-console.log(e.target)
-    
-  }
+      [name]: value,
+    }));
+    console.log(e.target);
+  };
 
-console.log(dt)
-
-
-
-
-
-
+  console.log(dt);
 
   return (
-    <div className="Profile" >
+    <div className="Profile">
       <h3>PROFILE</h3>
-      <form className="Profile-form" onSubmit={handleSubmit} >
+      <form className="Profile-form" onSubmit={handleSubmit}>
         <label>USERNAME</label>
-        <input name="username" type='text' value={dt.username} onChange={handleChange}/>
+        <input
+          name="username"
+          type="text"
+          value={dt.username}
+          onChange={handleChange}
+        />
         <label>PASSWORD</label>
-        <input name="password" type='text' value={dt.password} onChange={handleChange}/>
-      
+        <input
+          name="password"
+          type="password"
+          value={dt.password}
+          onChange={handleChange}
+        />
+
         <label>FIRST NAME</label>
-        <input name="firstName" type='text' value={dt.firstName} onChange={handleChange} />
+        <input
+          name="firstName"
+          type="text"
+          value={dt.firstName}
+          onChange={handleChange}
+        />
         <label>LAST NAME</label>
-        <input name="lastName" type='text' value={dt.lastName} onChange={handleChange}/>
+        <input
+          name="lastName"
+          type="text"
+          value={dt.lastName}
+          onChange={handleChange}
+        />
         <label>E-MAIL</label>
-        <input name="email" type="email" value={dt.email} onChange={handleChange}/>
+        <input
+          name="email"
+          type="email"
+          value={dt.email}
+          onChange={handleChange}
+        />
 
-      <button className='Profile-btn'>EDIT</button>
+        <button className="Profile-btn">EDIT</button>
       </form>
-
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

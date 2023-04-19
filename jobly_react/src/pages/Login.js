@@ -61,7 +61,7 @@ const Login = ({ setData, setLog, token, data,logIn,setToken }) => {
           />
           <label>PASSWORD</label>
           <input
-            type="text"
+            type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}

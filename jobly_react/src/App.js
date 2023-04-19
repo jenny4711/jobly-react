@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import uuid from "react-uuid";
 import useLocalStorage from "./useLocalStorage";
+
 import { Routes, Route } from "react-router-dom";
 
 import Navb from "./pages/Navb";
@@ -24,7 +25,7 @@ function App() {
   const [log, setLog] = useState(false);
   const [token, setToken] = useLocalStorage("token", "");
   const [data, setData] = useState(null);
-  const [errMsg, setErrMsg] = useState("");
+  const [errMsg, setErrMsg] = useState();
   const [userInfo, setUserInfo] = useState(null);
 
   const signUp = async (newData) => {
@@ -89,8 +90,7 @@ function App() {
     }
   }, [token]);
 
-  console.log(dt);
-  console.log(userInfo);
+
   return (
     <div
       key={uuid()}
@@ -136,9 +136,9 @@ function App() {
         />
         <Route
           path="/companies/:handle"
-          element={<PrivateRoutesCD log={log} />}
+          element={<PrivateRoutesCD log={log} dt={dt} setErrMsg={setErrMsg}/>}
         />
-        <Route path="/jobs" element={<PrivateRoutesJB log={log} />} />
+        <Route path="/jobs" element={<PrivateRoutesJB log={log} dt={dt} setErrMsg={setErrMsg}/>} />
         <Route
           path="/login"
           element={

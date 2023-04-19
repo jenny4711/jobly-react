@@ -31,7 +31,7 @@ const Companies= () => {
     }
   }
 
-  console.log(companies);
+
   useEffect(() => {
    
     getList();

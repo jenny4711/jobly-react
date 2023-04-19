@@ -3,9 +3,9 @@ import "../CSS/Jobs.css";
 import JoblyApi from "../api";
 import Pagination from "./Pagination";
 import JobCard from "./JobCard";
-import uuid from 'react-uuid';
+import uuid from "react-uuid";
 
-const Jobs = () => {
+const Jobs = ({ dt, setErrMsg }) => {
   const [jobs, setJobs] = useState();
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,7 +17,6 @@ const Jobs = () => {
       const keyword = e.target.value;
       await getJobList(keyword);
       setSearchOn(true);
-      console.log(keyword);
     }
   };
   const getJobList = async (title) => {
@@ -42,17 +41,8 @@ const Jobs = () => {
   // get pageNumber
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  console.log(jobs);
   return (
-    <div
-    key={uuid()}
-      className="Jobs-back"
-      // style={{
-      //   backgroundImage: "url(./img/bkg.avif)",
-      //   backgroundRepeat: "no-repeat",
-      //   backgroundSize: "cover",
-      // }}
-    >
+    <div key={uuid()} className="Jobs-back">
       <div className="Jobs" key={uuid()}>
         <div className="Jobs-top" key={uuid()}>
           <h2>Jobs</h2>
@@ -73,6 +63,8 @@ const Jobs = () => {
               equity={item.equity ? item.equity : ""}
               companyHandle={item.companyHandle}
               companyName={item.companyName}
+              dt={dt}
+              setErrMsg={setErrMsg}
             />
           ))}
         </div>

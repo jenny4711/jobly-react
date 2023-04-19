@@ -13,12 +13,12 @@ const PrivateRoutes = ({log,setErrMsg}) => {
   
 }
 
-const PrivateRoutesCD=({log})=>{
-  return log === true?<CompanyDetail/>:<Navigate to="/"/>
+const PrivateRoutesCD=({log,dt,setErrMsg})=>{
+  return log === true?<CompanyDetail dt={dt} setErrMsg={setErrMsg}/>:<Navigate to="/"/>
   }
 
-  const PrivateRoutesJB=({log})=>{
-    return log === true?<Jobs/>:<Navigate to="/"/>
+  const PrivateRoutesJB=({log,dt,setErrMsg})=>{
+    return log === true?<Jobs dt={dt} setErrMsg={setErrMsg} />:<Navigate to="/"/>
   }
   const PrivateRoutesPF=({log,userInfo,dt,setDt,setErrMsg})=>{
     return log === true?<Profile userInfo={userInfo} dt={dt} setDt={setDt} setErrMsg={setErrMsg} />:<Navigate to="/"/>

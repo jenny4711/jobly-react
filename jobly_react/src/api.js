@@ -80,6 +80,7 @@ class JoblyApi {
     await this.request(`users/${username}/jobs/${id}`,{},"post")
   }
   
+  
   // obviously, you'll add a lot here ...
 }
 

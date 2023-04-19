@@ -4,11 +4,11 @@ import JobDetail from "./JobDetail";
 import { useParams } from "react-router-dom";
 import "../CSS/CompanyDetail.css";
 
-const CompanyDetail = () => {
+const CompanyDetail = ({dt,setErrMsg}) => {
   const { handle } = useParams();
   const [handleSearch, sethandleSearch] = useState(null);
   const [jobs, setJobs] = useState(null);
-
+console.log(dt)
   async function searchByHandle(handle) {
     try {
       let result = await JoblyApi.getCompany(handle);
@@ -61,6 +61,8 @@ const CompanyDetail = () => {
                   title={item.title}
                   salary={item.salary}
                   equity={item.equity}
+                  dt={dt}
+                  setErrMsg={setErrMsg}
                 />
               ))
             ) : (

@@ -17,7 +17,9 @@ const morgan = require("morgan");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://shrill-middle.surge.sh'
+}));
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authenticateJWT);

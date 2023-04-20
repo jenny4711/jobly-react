@@ -17,7 +17,7 @@ const morgan = require("morgan");
 
 const app = express();
 app.use(cors({
-  origin: 'https://shrill-middle.surge.sh/'
+  origin: '*'
   }));
 // app.use(cors());
 app.use(express.json());

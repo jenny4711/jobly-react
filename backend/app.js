@@ -16,10 +16,14 @@ const jobsRoutes = require("./routes/jobs");
 const morgan = require("morgan");
 
 const app = express();
+// app.use(cors({
+//   origin: 'https://shrill-middle.surge.sh'
+// }));
 app.use(cors({
-  origin: 'https://shrill-middle.surge.sh'
-}));
-// app.use(cors());
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  }));
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authenticateJWT);
